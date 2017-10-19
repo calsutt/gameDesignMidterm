@@ -12,6 +12,7 @@ TagManager:
   - gem
   - Coin
   - Enemy
+  - level3box
   layers:
   - Default
   - TransparentFX
