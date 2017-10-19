@@ -19,8 +19,8 @@ public class EnemyAI : MonoBehaviour {
 		SpriteRenderer enemySprite = this.GetComponent<SpriteRenderer> ();
 		enemyBody = this.GetComponent<Rigidbody2D> ();
 
-		enemyWidth = enemySprite.bounds.extents.x; //gets enemy width on x axis
-		enemyHeight = enemySprite.bounds.extents.y; //gets enemy height on y axis
+		enemyWidth = enemySprite.bounds.extents.x /12.0f; //gets enemy width on x axis
+		enemyHeight = enemySprite.bounds.extents.y /200.0f; //gets enemy height on y axis
 
 		enemyPosition = this.transform;
 
@@ -31,13 +31,13 @@ public class EnemyAI : MonoBehaviour {
 
 		Vector2 lineCastPos = enemyPosition.position.toVector2 () - enemyPosition.right.toVector2 () * enemyWidth + Vector2.up * enemyHeight;
 
-		bool isGrounded = Physics2D.Linecast (lineCastPos, lineCastPos + Vector2.down, enemyMask);
+		bool isGrounded = Physics2D.Linecast (lineCastPos, lineCastPos + Vector2.down *1.5f, enemyMask);
 
 		bool isBlocked = Physics2D.Linecast (lineCastPos, lineCastPos - enemyPosition.right.toVector2 () * .05f);
 
 		Debug.DrawLine (lineCastPos, lineCastPos - enemyPosition.right.toVector2 () * .05f);
 
-		Debug.DrawLine (lineCastPos, lineCastPos + Vector2.down);
+		Debug.DrawLine (lineCastPos, lineCastPos + Vector2.down * 2.0f);
 
 		Debug.Log ("IsGrounded: " + isGrounded + " isBlocked: " + isBlocked + "\nenemy position: " + enemyPosition.position +
 			" speed: " + speed);

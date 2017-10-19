@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 	//Update is called once per frame
 	void Update () {
         anim.SetBool("isGrounded", isGrounded); //setting grounded value in animation
-        anim.SetFloat("speed", Mathf.Abs(rigBody.velocity.x)); //setting velocity value in animation
+        anim.SetFloat("Speed", Mathf.Abs(rigBody.velocity.x)); //setting velocity value in animation
 		anim.SetBool("isAlive", deathCheck);
 		anim.SetBool("isDamaged", hurt);
 
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (!isGrounded)
         {
-            velocity = 100f;//signifies air speed
+            velocity = 150f;//signifies air speed
         }
         else
         {
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Z)) {
 			Instantiate (bullet, bulletPoint.position, bulletPoint.rotation);
 		}
-		if (Input.GetKeyDown (KeyCode.R)) {
+		if (Input.GetKeyDown (KeyCode.R) && deathCheck) {
 			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 		}
 		if (!deathCheck) {
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour {
 			audio.PlayOneShot (coinCollect, 1.0f);
 		}
 		if (col.CompareTag ("level2Box")) {
-			SceneManager.LoadScene ("firstlevel");
+			SceneManager.LoadScene ("scene2");
 			Debug.Log ("SCENE CHANGED");
 		}
 	}
@@ -164,9 +164,10 @@ public class PlayerController : MonoBehaviour {
 	}
 	void Death (){
 		deathCheck = true;
-		gameOverScreen.SetActive (true);
+
 		if(deathCheck){
 			Debug.Log ("We Dead");
+			gameOverScreen.SetActive (true);
 			Time.timeScale = 0;//freeze game
 		}
 

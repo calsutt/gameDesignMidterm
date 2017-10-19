@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class BulletController : MonoBehaviour {
-
+	
 	public float speed;//check to see if this works
 	public GameObject bullet;
 
@@ -17,7 +17,9 @@ public class BulletController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerController> ();
-
+		if (player.transform.localScale.x < 0) {
+			speed= -speed;
+		}
 		audio = GetComponent<AudioSource> ();
 
 
@@ -25,11 +27,8 @@ public class BulletController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GetComponent<Rigidbody2D> ().velocity = new Vector2 (speed, 0.0f);
+		GetComponent<Rigidbody2D> ().velocity = new Vector2 (speed,0);
 
-		if (player.transform.localScale.x < 0) {
-			speed= -speed;
-		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other){

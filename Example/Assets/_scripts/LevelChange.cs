@@ -7,7 +7,8 @@ public class LevelChange : MonoBehaviour {
 	// Use this for initialization
 
 	void OnTriggerEnter2d(Collision2D other){
-		SceneManager.LoadScene ("firstlevel");
+		SceneManager.LoadScene ("scene2");
+		Debug.Log ("Here");
 	}
 
 }
